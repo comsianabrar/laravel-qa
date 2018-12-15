@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <h1>Ask Question</h1>
+                            <h1>{{ $question->title }}</h1>
 
                             <div class="ml-auto">
                                 <a href="{{route('questions.index')}}" class="btn btn-outline-secondary">
@@ -18,10 +18,7 @@
                     </div>
 
                     <div class="card-body">
-                        {{--Fill in the Question Form--}}
-                        <form action="{{route('questions.store')}}" method="POST">
-                            @include('layouts._questionForm', ['buttonText'=>'Ask this question'])
-                        </form>
+                        {!! $question->body_html !!}
                     </div>
                 </div>
             </div>

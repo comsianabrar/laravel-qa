@@ -10503,6 +10503,10 @@ a.text-dark:focus {
 }
 
 .counters .view {
-  margin-top: 20px;
+  margin-top: 10px;
+}
+
+form.form-delete {
+  display: inline;
 }
 
