@@ -10,12 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionsController extends Controller
 {
-    private $except = [];
-
     public function __construct()
     {
-        $this->except = ['index', 'show'];
-        $this->middleware('auth', $this->except);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
