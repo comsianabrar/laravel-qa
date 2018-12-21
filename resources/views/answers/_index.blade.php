@@ -40,7 +40,7 @@
                             </form>
 
 
-                            @can('accept_best_answer', $question)
+                            @can('accept', $answer)
                                 <a title="Mark this answer as best answer" class="{{$answer->status}} mt-2"
                                    onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();"
                                 >

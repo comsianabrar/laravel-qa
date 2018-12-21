@@ -8,6 +8,8 @@ class Answer extends Model
 {
     protected $fillable = ['body', 'user_id'];
 
+    use VoteableTrait;
+
     public function question()
     {
         return $this->belongsTo(Question::class);
@@ -40,12 +42,12 @@ class Answer extends Model
 
     public function getIsAcceptedAttribute()
     {
-        return $this->isAccepted() ;
+        return $this->isAccepted();
     }
 
     public function isAccepted()
     {
-        return  $this->id === $this->question->best_answer ? 'vote-accepted' : '';
+        return $this->id === $this->question->best_answer ? 'vote-accepted' : '';
     }
 
     public function votes()
@@ -53,26 +55,4 @@ class Answer extends Model
         return $this->morphToMany(User::class, 'voteable');
     }
 
-    public function upVotes()
-    {
-        return $this->votes()->wherePivot('vote', 1);
-    }
-
-    public function downVotes()
-    {
-        return $this->votes()->wherePivot('vote', -1);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::created(function ($answer) {
-            $answer->question->increment('answers_count');
-        });
-
-        static::deleted(function ($answer) {
-            $answer->question->decrement('answers_count');
-        });
-    }
 }

@@ -18,11 +18,6 @@ class QuestionPolicy
      * @return mixed
      */
 
-    public function accept_best_answer(User $user, Question $question)
-    {
-        return $user->id == $question->user_id;
-    }
-
 //    public function view(User $user, Question $question)
 //    {
 //        //
