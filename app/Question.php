@@ -49,4 +49,45 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function acceptBestAnswer(Answer $answer)
+    {
+        $this->best_answer = $answer->id;
+        $this->save();
+    }
+
+    public function favorities()
+    {
+        return $this->belongsToMany(User::class, 'favorities')->withTimestamps();
+    }
+
+    public function isFavorited()
+    {
+        return $this->favorities()->where('user_id', auth()->id())->count() > 0;
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavorited();
+    }
+
+    public function getFavoritiesCountAttribute()
+    {
+        return $this->favorities()->count();
+    }
+
+    public function votes()
+    {
+        return $this->morphToMany(User::class, 'voteable');
+    }
+
+    public function upVotes()
+    {
+        return $this->votes()->wherePivot('vote', 1);
+    }
+
+    public function downVotes()
+    {
+        return $this->votes()->wherePivot('vote', -1);
+    }
 }

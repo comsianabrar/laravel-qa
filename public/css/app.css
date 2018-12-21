@@ -16120,7 +16120,8 @@ form.form-delete {
 }
 
 .vote-controls span.favorites-count {
-  font-size: 12px;
+  font-size: 13px;
+  color: #adb5bd;
 }
 
 .vote-controls a {
